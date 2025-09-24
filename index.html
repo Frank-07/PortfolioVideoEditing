@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franco Agnic - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        /* Custom aspect ratio for YouTube iframes */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-gray-900 shadow-lg fixed top-0 w-full z-10">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-50 uppercase tracking-wide">
+                <a href="#inicio" class="hover:text-amber-400 transition-colors">Frank Agnic</a>
+            </h1>
+            <div class="space-x-4">
+                <a href="#acerca-de-mi" class="text-gray-300 hover:text-white font-medium transition-colors">Acerca de mí</a>
+                <a href="#proyectos" class="text-gray-300 hover:text-white font-medium transition-colors">Proyectos</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-24 pb-12">
+
+        <!-- About Me Section -->
+        <section id="acerca-de-mi" class="container mx-auto px-6 mb-16">
+            <div class="bg-gray-800 p-8 md:p-12 rounded-xl shadow-lg border border-gray-700">
+                <h2 class="text-4xl font-bold text-white mb-4">Acerca de mí</h2>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Hola soy Franco Agnic, pero puedes llamarme Frank. Soy Artista Técnico en desarrollo de videojuegos, me especializo en la creación de entornos virtuales, renders cinematográficos y efectos visuales con Unreal Engine 5, modelado 3D y texturizado con Blender, y edición y postproducción en Adobe Premier y Photoshop.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="proyectos" class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-white mb-8 text-center">Proyectos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Video 1 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/j_8j4f-9e3M?si=GzKx1o0W15x18KjQ" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white">Don't Kill Rumble - Teaser Oficial</h3>
+                        <p class="text-sm text-gray-400 mt-2">Prepárate para el caos multijugador</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/g2J6V5L1g-c?si=hC77U8z_Q_m_1-eI" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white">Don't Kill Rumble - Demo Trailer</h3>
+                        <p class="text-sm text-gray-400 mt-2">Latin American Games Showcase x Summer Games Fest</p>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/j_d_t_jR5hU?si=1m4c9wW055h2L1vC" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white">Don't Kill Rumble - Official Game Trailer</h3>
+                        <p class="text-sm text-gray-400 mt-2">Latin American Games Showcase The Game Awards Edition</p>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/U9d6o94r8gE?si=bJj6C54sP4L44-8d" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white">Junior Solutions - PC Trailer</h3>
+                        <p class="text-sm text-gray-400 mt-2">Un vistazo al mundo de Junior Solutions</p>
+                    </div>
+                </div>
+
+                <!-- Video 5 -->
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/9wD81q_7vG0?si=Wp3nO1vD96gO3_bT" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white">Scubanniversary 5 years</h3>
+                        <p class="text-sm text-gray-400 mt-2">Un aniversario submarino</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 py-6 mt-16">
+        <div class="container mx-auto text-center text-gray-400 text-sm">
+            <p>&copy; 2024 Franco Agnic. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
