@@ -1,164 +1,400 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franco Agnic - Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #121212;
-            color: #E0E0E0;
-        }
-        .container {
-            max-width: 1200px;
-        }
-        /* Custom aspect ratio for YouTube iframes */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>
-<body class="antialiased">
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import {
+  Mail,
+  Phone,
+  Globe,
+  Linkedin,
+  Youtube,
+  Instagram,
+  Play,
+  ExternalLink,
+} from "lucide-react";
 
-    <!-- Header Section -->
-    <header class="bg-gray-900 shadow-lg fixed top-0 w-full z-10">
-        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
-            <h1 class="text-3xl font-bold text-gray-50 uppercase tracking-wide">
-                <a href="#inicio" class="hover:text-amber-400 transition-colors">Frank Agnic</a>
-            </h1>
-            <div class="space-x-4">
-                <a href="#acerca-de-mi" class="text-gray-300 hover:text-white font-medium transition-colors">Acerca de mí</a>
-                <a href="#proyectos" class="text-gray-300 hover:text-white font-medium transition-colors">Proyectos</a>
+// ————————————————
+// PORTFOLIO TEMPLATE – Single-file React component
+// Tech: TailwindCSS + shadcn/ui + Framer Motion + lucide-react
+// Sections: Cover Letter + Work Showcase with embedded videos
+// Edit the placeholders marked with TODO
+// ————————————————
+
+const software = [
+  { name: "Premiere Pro", note: "Edición y narrativa" },
+  { name: "After Effects", note: "Motion & VFX" },
+  { name: "Unreal Engine 5", note: "Render cinematográfico" },
+  { name: "DaVinci Resolve", note: "Color grading" },
+];
+
+const socials = [
+  { label: "Email", icon: Mail, href: "mailto:franco.agnic7@gmail.com" }, // TODO
+  { label: "Teléfono", icon: Phone, href: "tel:+542613029570" }, // TODO
+  { label: "Portfolio", icon: Globe, href: "https://frank-07.github.io/MyPortfolio/" }, // TODO
+  { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/franco-agnic" }, // TODO
+  { label: "YouTube", icon: Youtube, href: "https://youtube.com/" }, // TODO
+  { label: "Instagram", icon: Instagram, href: "https://instagram.com/" }, // TODO
+];
+
+// Replace these with your real video links (YouTube/Vimeo/Player)
+const featuredReel = {
+  title: "Cinematic Reel UE5 2025", // TODO
+  src: "https://www.youtube.com/embed/dQw4w9WgXcQ", // TODO
+  description: "Selección de tomas cinemáticas en Unreal Engine 5 + edición en Premiere + FX en After Effects.",
+};
+
+const projects = [
+  {
+    title: "Trailer – Sci‑Fi Short (UE5)",
+    src: "https://www.youtube.com/embed/dQw4w9WgXcQ", // TODO
+    tags: ["UE5", "Cinematic", "Grading"],
+    role: "Dirección, Cámara Virtual, Edición, Color",
+  },
+  {
+    title: "Motion Graphics – Branding Pack",
+    src: "https://player.vimeo.com/video/76979871?badge=0&autopause=0&player_id=0&app_id=58479", // TODO
+    tags: ["After Effects", "2D/3D"],
+    role: "Animación, Compositing",
+  },
+  {
+    title: "Gameplay Teaser – UE5",
+    src: "https://www.youtube.com/embed/dQw4w9WgXcQ", // TODO
+    tags: ["UE5", "Premiere"],
+    role: "Captura in‑engine, Edición",
+  },
+  {
+    title: "Music Video – Edit & FX",
+    src: "https://www.youtube.com/embed/dQw4w9WgXcQ", // TODO
+    tags: ["Premiere", "AE"],
+    role: "Ritmo, Transiciones, FX",
+  },
+];
+
+function SectionHeader({ kicker, title, desc }: { kicker?: string; title: string; desc?: string }) {
+  return (
+    <div className="mb-6">
+      {kicker && (
+        <p className="uppercase tracking-widest text-xs text-muted-foreground mb-2">{kicker}</p>
+      )}
+      <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>
+      {desc && <p className="text-muted-foreground mt-2 max-w-2xl">{desc}</p>}
+    </div>
+  );
+}
+
+export default function PortfolioVideoEditor() {
+  const [active, setActive] = useState<"cover" | "work">("cover");
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
+      {/* Nav */}
+      <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 border-b border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="size-9 rounded-xl bg-white/10 grid place-items-center">
+              <Play className="size-5" />
             </div>
-        </nav>
-    </header>
-
-    <main class="pt-24 pb-12">
-
-        <!-- About Me Section -->
-        <section id="acerca-de-mi" class="container mx-auto px-6 mb-16">
-            <div class="bg-gray-800 p-8 md:p-12 rounded-xl shadow-lg border border-gray-700">
-                <h2 class="text-4xl font-bold text-white mb-4">Acerca de mí</h2>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    Hola soy Franco Agnic, pero puedes llamarme Frank. Soy Artista Técnico en desarrollo de videojuegos, me especializo en la creación de entornos virtuales, renders cinematográficos y efectos visuales con Unreal Engine 5, modelado 3D y texturizado con Blender, y edición y postproducción en Adobe Premier y Photoshop.
-                </p>
+            <div>
+              <p className="text-sm text-white/60 leading-none">Video Editor · Technical Artist (UE5)</p>
+              <h1 className="font-semibold leading-tight">Franco Agnic{/* TODO: tu nombre */}</h1>
             </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="proyectos" class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-white mb-8 text-center">Proyectos</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Video 1 -->
-                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/j_8j4f-9e3M?si=GzKx1o0W15x18KjQ" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white">Don't Kill Rumble - Teaser Oficial</h3>
-                        <p class="text-sm text-gray-400 mt-2">Prepárate para el caos multijugador</p>
-                    </div>
-                </div>
-
-                <!-- Video 2 -->
-                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/g2J6V5L1g-c?si=hC77U8z_Q_m_1-eI" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white">Don't Kill Rumble - Demo Trailer</h3>
-                        <p class="text-sm text-gray-400 mt-2">Latin American Games Showcase x Summer Games Fest</p>
-                    </div>
-                </div>
-
-                <!-- Video 3 -->
-                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/j_d_t_jR5hU?si=1m4c9wW055h2L1vC" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white">Don't Kill Rumble - Official Game Trailer</h3>
-                        <p class="text-sm text-gray-400 mt-2">Latin American Games Showcase The Game Awards Edition</p>
-                    </div>
-                </div>
-
-                <!-- Video 4 -->
-                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/U9d6o94r8gE?si=bJj6C54sP4L44-8d" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white">Junior Solutions - PC Trailer</h3>
-                        <p class="text-sm text-gray-400 mt-2">Un vistazo al mundo de Junior Solutions</p>
-                    </div>
-                </div>
-
-                <!-- Video 5 -->
-                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700">
-                    <div class="video-container">
-                        <iframe 
-                            src="https://www.youtube.com/embed/9wD81q_7vG0?si=Wp3nO1vD96gO3_bT" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white">Scubanniversary 5 years</h3>
-                        <p class="text-sm text-gray-400 mt-2">Un aniversario submarino</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer Section -->
-    <footer class="bg-gray-900 py-6 mt-16">
-        <div class="container mx-auto text-center text-gray-400 text-sm">
-            <p>&copy; 2024 Franco Agnic. Todos los derechos reservados.</p>
+          </div>
+          <nav className="flex items-center gap-2">
+            <Button variant={active === "cover" ? "default" : "secondary"} onClick={() => setActive("cover")} className="rounded-2xl">
+              Cover Letter
+            </Button>
+            <Button variant={active === "work" ? "default" : "secondary"} onClick={() => setActive("work")} className="rounded-2xl">
+              Muestras de Trabajo
+            </Button>
+          </nav>
         </div>
-    </footer>
+      </header>
 
-</body>
-</html>
+      {/* Hero */}
+      <motion.section
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto max-w-6xl px-4 pt-10 pb-4"
+      >
+        <Card className="border-white/10 bg-white/5">
+          <CardContent className="p-6 md:p-8">
+            <div className="grid md:grid-cols-[1.2fr,0.8fr] gap-8">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-black leading-[1.1]">
+                  Edición cinematográfica con flujo Premiere · After Effects · UE5
+                </h2>
+                <p className="mt-4 text-white/80">
+                  Soy Technical Artist y Editor de Video con foco en narrativas ágiles, acabados cinematográficos
+                  y renders en tiempo real con Unreal Engine 5. Combino <span className="font-medium">montaje, motion graphics</span>
+                  y <span className="font-medium">captura in‑engine</span> para entregar piezas con ritmo, claridad y estética.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {software.map((s) => (
+                    <Badge key={s.name} variant="secondary" className="rounded-full px-3 py-1 text-sm">
+                      {s.name}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <Card className="h-full border-white/10 bg-black/30">
+                  <CardHeader>
+                    <CardTitle>Contacto</CardTitle>
+                    <CardDescription>Escribime para colaboraciones, ediciones y trailers.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-3">
+                    {socials.map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition"
+                      >
+                        <div className="flex items-center gap-3">
+                          <s.icon className="size-5 opacity-80 group-hover:opacity-100" />
+                          <span className="font-medium">{s.label}</span>
+                        </div>
+                        <ExternalLink className="size-4 opacity-50 group-hover:opacity-80" />
+                      </a>
+                    ))}
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.section>
+
+      <Separator className="my-6 bg-white/10" />
+
+      {/* Tabs content */}
+      {active === "cover" ? <CoverLetter /> : <WorkShowcase />}
+
+      {/* Footer */}
+      <footer className="mt-12 border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-10 grid md:grid-cols-2 gap-6 items-center">
+          <div>
+            <p className="text-white/70">¿Tenés un proyecto? Hablemos.</p>
+            <h3 className="text-2xl font-bold">Disponible para trabajos freelance y colaboraciones.</h3>
+          </div>
+          <div className="md:justify-self-end">
+            <a href="mailto:franco.agnic7@gmail.com" className="inline-block">{/* TODO */}
+              <Button size="lg" className="rounded-2xl">Contactar ahora</Button>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+function CoverLetter() {
+  return (
+    <section id="cover-letter" className="mx-auto max-w-6xl px-4 pb-10">
+      <SectionHeader
+        kicker="Sobre mí"
+        title="Cover Letter"
+        desc="Mi recorrido, especialidad y cómo trabajo."
+      />
+
+      <div className="grid lg:grid-cols-3 gap-6">
+        <Card className="lg:col-span-2 border-white/10 bg-white/5">
+          <CardHeader>
+            <CardTitle>Resumen</CardTitle>
+            <CardDescription>
+              Desarrollo de videojuegos orientado a la edición de video y creación de trailers.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-white/80">
+              Desde 2020 trabajo con <b>Unreal Engine</b> en flujos de captura y render en tiempo real, integrando
+              <b> Premiere Pro</b> para la edición y <b>After Effects</b> para motion y composición. Me enfoco en
+              <b> contar historias visuales</b> con ritmo, claridad y una estética pulida.
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-white/80">
+              <li>Captura in‑engine (sequencer, camera rigs, Lumen/Nanite presets).</li>
+              <li>Edición narrativa, música y diseño sonoro.</li>
+              <li>Compositing, títulos, lower thirds y gráficos animados.</li>
+              <li>Color grading y master de entrega para redes/TV/cine.</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="border-white/10 bg-white/5">
+          <CardHeader>
+            <CardTitle>Servicios</CardTitle>
+            <CardDescription>Qué puedo hacer por tu proyecto</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="font-medium">Trailers y Teasers</p>
+                <p className="text-sm text-white/70">Game/Film – montaje + FX + color</p>
+              </div>
+              <Badge variant="secondary">UE5 + AE</Badge>
+            </div>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="font-medium">Cinematics in‑engine</p>
+                <p className="text-sm text-white/70">Sequencer, cámaras, post</p>
+              </div>
+              <Badge variant="secondary">Realtime</Badge>
+            </div>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="font-medium">Motion Graphics</p>
+                <p className="text-sm text-white/70">Branding packs, títulos, HUD</p>
+              </div>
+              <Badge variant="secondary">AE</Badge>
+            </div>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="font-medium">Edición para redes</p>
+                <p className="text-sm text-white/70">Cortes verticales, subtítulos, callouts</p>
+              </div>
+              <Badge variant="secondary">Premiere</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-6 mt-6">
+        <Card className="border-white/10 bg-white/5">
+          <CardHeader>
+            <CardTitle>Stack</CardTitle>
+            <CardDescription>Softwares y herramientas</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-2">
+            {software.map((s) => (
+              <Badge key={s.name} className="rounded-full" variant="secondary">
+                {s.name}
+              </Badge>
+            ))}
+          </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-2 border-white/10 bg-white/5">
+          <CardHeader>
+            <CardTitle>Experiencia</CardTitle>
+            <CardDescription>Videojuegos y edición</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <TimelineItem
+              title="Technical Artist / Video Editor"
+              org="Scubalight Studios" // TODO
+              time="2020 – Presente"
+              bullets={[
+                "Edición de trailers y teasers para proyectos UE5",
+                "Cinemáticas in‑engine (Sequencer, cámaras, luz)",
+                "Compositing y motion graphics en After Effects",
+              ]}
+            />
+            <TimelineItem
+              title="Game Dev / Content Creator"
+              org="Skoogalike Studios" // TODO
+              time="2020 – Presente"
+              bullets={[
+                "Captura de gameplay y montaje de devlogs",
+                "Color grading y delivery multiplataforma",
+              ]}
+            />
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}
+
+function WorkShowcase() {
+  return (
+    <section id="work" className="mx-auto max-w-6xl px-4 pb-16">
+      <SectionHeader
+        kicker="Portfolio"
+        title="Muestras de trabajo"
+        desc="Videos incrustados directamente en la página. Reemplazá los enlaces por tus piezas reales."
+      />
+
+      {/* Featured Reel */}
+      <Card className="border-white/10 bg-white/5 overflow-hidden">
+        <CardHeader>
+          <CardTitle>{featuredReel.title}</CardTitle>
+          <CardDescription>{featuredReel.description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+            <iframe
+              className="h-full w-full"
+              src={featuredReel.src}
+              title={featuredReel.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Grid */}
+      <div className="grid md:grid-cols-2 gap-6 mt-6">
+        {projects.map((p, i) => (
+          <motion.div
+            key={p.title}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
+            viewport={{ once: true }}
+          >
+            <Card className="border-white/10 bg-white/5 overflow-hidden">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl">{p.title}</CardTitle>
+                <CardDescription className="flex flex-wrap gap-2 mt-2">
+                  {p.tags.map((t) => (
+                    <Badge key={t} variant="secondary" className="rounded-full">
+                      {t}
+                    </Badge>
+                  ))}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+                  <iframe
+                    className="h-full w-full"
+                    src={p.src}
+                    title={p.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+                <p className="text-sm text-white/70 mt-3">{p.role}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TimelineItem({ title, org, time, bullets }: { title: string; org: string; time: string; bullets: string[] }) {
+  return (
+    <div className="relative pl-6">
+      <div className="absolute left-0 top-2 size-2 rounded-full bg-white/60" />
+      <p className="text-sm text-white/60">{time}</p>
+      <h4 className="text-lg font-semibold">{title} · <span className="text-white/70">{org}</span></h4>
+      <ul className="list-disc pl-5 text-white/80 mt-2 space-y-1">
+        {bullets.map((b) => (
+          <li key={b}>{b}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
