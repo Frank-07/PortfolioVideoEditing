@@ -23,20 +23,26 @@
     .separator { margin:1.5rem 0; height:1px; background-color: rgba(255,255,255,0.1); width:100%; }
     .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
+    .vertical-videos { display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; }
+    .portrait { aspect-ratio: 9/16; width: 250px; }
+    .iframe-clean { border:1px solid rgba(255,255,255,0.1); border-radius:1rem; overflow:hidden; }
+    video { border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); width:250px; height:444px; object-fit:cover; }
   </style>
 </head>
 <body class="min-h-screen text-zinc-100">
 
+  <!-- Top Nav -->
   <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 border-b border-white/5 py-5">
     <div class="mx-auto max-w-6xl flex flex-col items-center justify-center text-center gap-4">
       <nav class="flex flex-wrap justify-center gap-4">
-        <a id="btn-cover" class="btn btn-secondary" href="https://frank-07.github.io/Cover-Letter-VideoEdit/" target="_blank">Cover Letter</a>
-        <a id="btn-cv" class="btn btn-secondary" href="https://frank-07.github.io/CV-VideoEdit/" target="_blank">CV</a>
+        <a id="btn-cover" class="btn btn-secondary" href="https://frank-07.github.io/Cover-Letter-VideoEdit/" target="_blank" rel="noreferrer noopener">Cover Letter</a>
+        <a id="btn-cv" class="btn btn-secondary" href="https://frank-07.github.io/CV-VideoEdit/" target="_blank" rel="noreferrer noopener">CV</a>
         <button id="btn-work" class="btn btn-default">Work Samples</button>
       </nav>
     </div>
   </header>
 
+  <!-- About Me (restored) -->
   <section class="mx-auto max-w-6xl px-4 pt-10 pb-4 reveal">
     <div class="card">
       <div class="p-6 md:p-8">
@@ -66,38 +72,33 @@ With experience across post-production and real-time workflows, I thrive in proj
               <div class="p-4 grid gap-3">
                 <a class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition" href="mailto:franco.agnic7@gmail.com" target="_blank" rel="noreferrer noopener">
                   <div class="flex items-center gap-3">
-                    <i data-lucide="mail" class="size-5 opacity-80 group-hover:opacity-100"></i>
                     <span class="font-medium">Email</span>
                   </div>
-                  <i data-lucide="external-link" class="size-4 opacity-50 group-hover:opacity-80"></i>
+                  <span class="opacity-60">→</span>
                 </a>
                 <a class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition" href="tel:+542613029570" target="_blank" rel="noreferrer noopener">
                   <div class="flex items-center gap-3">
-                    <i data-lucide="phone" class="size-5 opacity-80 group-hover:opacity-100"></i>
                     <span class="font-medium">Phone</span>
                   </div>
-                  <i data-lucide="external-link" class="size-4 opacity-50 group-hover:opacity-80"></i>
+                  <span class="opacity-60">→</span>
                 </a>
                 <a class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition" href="https://frank-07.github.io/MyPortfolio/" target="_blank" rel="noreferrer noopener">
                   <div class="flex items-center gap-3">
-                    <i data-lucide="globe" class="size-5 opacity-80 group-hover:opacity-100"></i>
                     <span class="font-medium">Video Game Portfolio</span>
                   </div>
-                  <i data-lucide="external-link" class="size-4 opacity-50 group-hover:opacity-80"></i>
+                  <span class="opacity-60">→</span>
                 </a>
                 <a class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition" href="https://www.linkedin.com/in/franco-agnic" target="_blank" rel="noreferrer noopener">
                   <div class="flex items-center gap-3">
-                    <i data-lucide="linkedin" class="size-5 opacity-80 group-hover:opacity-100"></i>
                     <span class="font-medium">LinkedIn</span>
                   </div>
-                  <i data-lucide="external-link" class="size-4 opacity-50 group-hover:opacity-80"></i>
+                  <span class="opacity-60">→</span>
                 </a>
                 <a class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition" href="https://www.youtube.com/@FrancoAgnic" target="_blank" rel="noreferrer noopener">
                   <div class="flex items-center gap-3">
-                    <i data-lucide="youtube" class="size-5 opacity-80 group-hover:opacity-100"></i>
                     <span class="font-medium">YouTube</span>
                   </div>
-                  <i data-lucide="external-link" class="size-4 opacity-50 group-hover:opacity-80"></i>
+                  <span class="opacity-60">→</span>
                 </a>
               </div>
             </div>
@@ -107,13 +108,15 @@ With experience across post-production and real-time workflows, I thrive in proj
     </div>
   </section>
 
+  <!-- Work Samples (restored list) -->
   <section id="work" class="mx-auto max-w-6xl px-4 pb-16 reveal">
     <div class="mb-6">
       <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Work Samples</h2>
-      <p class="text-white/70 mt-2 max-w-2xl">Videos embedded directly on the page. Replace the links with your real pieces.</p>
+      <p class="text-white/70 mt-2 max-w-2xl">Videos embedded directly on the page.</p>
     </div>
 
     <div class="space-y-8">
+      <!-- 1 -->
       <div class="card overflow-hidden">
         <div class="p-6 border-b border-white/10">
           <h3 class="text-xl font-semibold">Don't Kill Rumble demo trailer Latin American Games Showcase</h3>
@@ -126,6 +129,7 @@ With experience across post-production and real-time workflows, I thrive in proj
         </div>
       </div>
 
+      <!-- 2 -->
       <div class="card overflow-hidden">
         <div class="p-6 border-b border-white/10">
           <h3 class="text-xl font-semibold">Don't Kill Rumble - Game Trailer</h3>
@@ -138,18 +142,44 @@ With experience across post-production and real-time workflows, I thrive in proj
         </div>
       </div>
 
-      <div class="card overflow-hidden">
+      <!-- 3 -->
+      <div class="card overflow-hidden" id="anniv">
         <div class="p-6 border-b border-white/10">
           <h3 class="text-xl font-semibold">5th Anniversary Video – Scubalight Studios</h3>
           <p class="text-sm text-white/70">Environment creation, visual effects, UE5 cinematic, sound and editing in Premiere.</p>
         </div>
         <div class="p-6">
           <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/3Sog0eJSjMg?enablejsapi=1&autoplay=0&loop=1&playlist=3Sog0eJSjMg&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="Video de aniversario 5 años Scubalight Studios" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/3Sog0eJSjMg?enablejsapi=1&autoplay=0&loop=1&playlist=3Sog0eJSjMg&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="5th Anniversary Video – Scubalight Studios" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
 
+      <!-- Vertical Videos section (visible now) -->
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-white/10 text-center">
+          <h3 class="text-xl font-semibold">Vertical Videos</h3>
+          <p class="text-sm text-white/70">Short format works edited and composed for social platforms.</p>
+        </div>
+        <div class="p-6 vertical-videos">
+          <!-- NOTE: For a truly minimal UI, host mp4 files and use the <video> tags below. Meanwhile, we show Instagram embeds so they are visible now. -->
+          <!-- Minimal player option (uncomment and add valid MP4 URLs):
+          <video autoplay loop muted playsinline poster="">
+            <source src="" type="video/mp4" />
+          </video>
+          <video autoplay loop muted playsinline poster="">
+            <source src="" type="video/mp4" />
+          </video>
+          -->
+          <iframe class="portrait iframe-clean" src="https://www.instagram.com/p/DBZJT5-Ow7i/embed" allowfullscreen loading="lazy"></iframe>
+          <iframe class="portrait iframe-clean" src="https://www.instagram.com/p/DAosNXAJp82/embed" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+
+      <!-- Personal Short Films header -->
+      <h2 class="text-2xl font-bold text-center text-white/90">Personal Short Films</h2>
+
+      <!-- 4 -->
       <div class="card overflow-hidden">
         <div class="p-6 border-b border-white/10">
           <h3 class="text-xl font-semibold">Dos Dimensiones: Skate Short Film</h3>
@@ -161,6 +191,7 @@ With experience across post-production and real-time workflows, I thrive in proj
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -175,6 +206,7 @@ With experience across post-production and real-time workflows, I thrive in proj
       </div>
     </div>
   </footer>
+
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
