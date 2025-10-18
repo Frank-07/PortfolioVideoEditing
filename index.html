@@ -61,18 +61,18 @@ With experience across post-production and real-time workflows, I thrive in proj
             </div>
           </div>
           <div>
-            <div class="card h-full" style="background-color: rgba(0,0,0,0.3)">
+            <div id="contact-methods" class="card h-full" style="background-color: rgba(0,0,0,0.3)">
               <div class="p-6 border-b border-white/10 flex flex-col items-center">
                 <img src="https://github.com/Frank-07/MyPortfolio/blob/main/imagenes/PerfilEdited.png?raw=true" alt="Profile Image" class="w-40 h-40 rounded-full border-4 border-white/10 shadow-lg mb-4" />
                 <p class="text-sm text-white/60 leading-none">Video Editor · Technical Artist (UE5)</p>
                 <h1 class="font-semibold leading-tight">Franco Agnic</h1>
               </div>
               <div class="p-4 grid gap-3">
-                <a class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition" href="mailto:franco.agnic7@gmail.com" target="_blank" rel="noreferrer noopener">
+                <a id="copy-email" data-email="franco.agnic7@gmail.com" class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition cursor-pointer" href="#" role="button">
                   <div class="flex items-center gap-3">
                     <span class="font-medium">Email</span>
                   </div>
-                  <span class="opacity-60">→</span>
+                  <span class="opacity-60">Copy</span>
                 </a>
                 <a class="group flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition" href="tel:+542613029570" target="_blank" rel="noreferrer noopener">
                   <div class="flex items-center gap-3">
@@ -223,10 +223,13 @@ With experience across post-production and real-time workflows, I thrive in proj
         <h3 class="text-2xl font-bold">Available for freelance work and collaborations.</h3>
       </div>
       <div class="md:justify-self-end">
-        <a href="mailto:franco.agnic7@gmail.com" class="inline-block"><button class="btn btn-default text-black">Contact now</button></a>
+        <button id="btn-contact-footer" class="btn btn-default text-black">Contact now
       </div>
     </div>
   </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[60] px-4 py-2 rounded-xl bg-white/90 text-black text-sm shadow-lg opacity-0 pointer-events-none transition-opacity duration-200">Email Copied</div>
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
@@ -234,6 +237,10 @@ With experience across post-production and real-time workflows, I thrive in proj
       const btnWork = document.getElementById('btn-work');
       const headerEl = document.querySelector('header');
       const sectionWork = document.getElementById('work');
+      const contactMethods = document.getElementById('contact-methods');
+      const btnContactFooter = document.getElementById('btn-contact-footer');
+      const copyEmailBtn = document.getElementById('copy-email');
+      const toast = document.getElementById('toast');
       function scrollWithOffset(target){
         if (!target) return;
         const headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
@@ -241,6 +248,28 @@ With experience across post-production and real-time workflows, I thrive in proj
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
       if (btnWork) btnWork.addEventListener('click', () => scrollWithOffset(sectionWork));
+      if (btnContactFooter) btnContactFooter.addEventListener('click', () => scrollWithOffset(contactMethods));
+      if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const email = copyEmailBtn.getAttribute('data-email');
+          if (!navigator.clipboard) {
+            const ta = document.createElement('textarea');
+            ta.value = email;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          } else {
+            navigator.clipboard.writeText(email).catch(()=>{});
+          }
+          if (toast) {
+            toast.textContent = 'Email Copied';
+            toast.style.opacity = '1';
+            setTimeout(() => { toast.style.opacity = '0'; }, 1600);
+          }
+        });
+      }
     });
   </script>
 </body>
