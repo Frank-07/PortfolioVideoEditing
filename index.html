@@ -24,8 +24,6 @@
     .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
     .vertical-videos { display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; }
-    .portrait { aspect-ratio: 9/16; width: 250px; }
-    .iframe-clean { border:1px solid rgba(255,255,255,0.1); border-radius:1rem; overflow:hidden; }
     video { border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); width:250px; height:444px; object-fit:cover; }
   </style>
 </head>
@@ -42,7 +40,7 @@
     </div>
   </header>
 
-  <!-- About Me (restored) -->
+  <!-- About Me -->
   <section class="mx-auto max-w-6xl px-4 pt-10 pb-4 reveal">
     <div class="card">
       <div class="p-6 md:p-8">
@@ -105,10 +103,11 @@ With experience across post-production and real-time workflows, I thrive in proj
           </div>
         </div>
       </div>
+  
     </div>
   </section>
 
-  <!-- Work Samples (restored list) -->
+  <!-- Work Samples -->
   <section id="work" class="mx-auto max-w-6xl px-4 pb-16 reveal">
     <div class="mb-6">
       <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Work Samples</h2>
@@ -116,7 +115,7 @@ With experience across post-production and real-time workflows, I thrive in proj
     </div>
 
     <div class="space-y-8">
-      <!-- 1 -->
+      <!-- Horizontal videos restored -->
       <div class="card overflow-hidden">
         <div class="p-6 border-b border-white/10">
           <h3 class="text-xl font-semibold">Don't Kill Rumble demo trailer Latin American Games Showcase</h3>
@@ -129,7 +128,6 @@ With experience across post-production and real-time workflows, I thrive in proj
         </div>
       </div>
 
-      <!-- 2 -->
       <div class="card overflow-hidden">
         <div class="p-6 border-b border-white/10">
           <h3 class="text-xl font-semibold">Don't Kill Rumble - Game Trailer</h3>
@@ -142,7 +140,6 @@ With experience across post-production and real-time workflows, I thrive in proj
         </div>
       </div>
 
-      <!-- 3 -->
       <div class="card overflow-hidden" id="anniv">
         <div class="p-6 border-b border-white/10">
           <h3 class="text-xl font-semibold">5th Anniversary Video – Scubalight Studios</h3>
@@ -155,39 +152,63 @@ With experience across post-production and real-time workflows, I thrive in proj
         </div>
       </div>
 
-      <!-- Vertical Videos section (visible now) -->
+      <!-- Vertical Videos section with MP4 sources -->
       <div class="card overflow-hidden">
         <div class="p-6 border-b border-white/10 text-center">
           <h3 class="text-xl font-semibold">Vertical Videos</h3>
           <p class="text-sm text-white/70">Short format works edited and composed for social platforms.</p>
         </div>
         <div class="p-6 vertical-videos">
-          <!-- NOTE: For a truly minimal UI, host mp4 files and use the <video> tags below. Meanwhile, we show Instagram embeds so they are visible now. -->
-          <!-- Minimal player option (uncomment and add valid MP4 URLs):
-          <video autoplay loop muted playsinline poster="">
-            <source src="" type="video/mp4" />
+          <video autoplay loop muted playsinline>
+            <source src="https://github.com/Frank-07/PortfolioVideoEditing/raw/aff657d18a839fc2472eb20755401a9bb15d1239/Videos/get.mp4" type="video/mp4">
           </video>
-          <video autoplay loop muted playsinline poster="">
-            <source src="" type="video/mp4" />
+          <video autoplay loop muted playsinline>
+            <source src="https://github.com/Frank-07/PortfolioVideoEditing/raw/aff657d18a839fc2472eb20755401a9bb15d1239/Videos/get2.mp4" type="video/mp4">
           </video>
-          -->
-          <iframe class="portrait iframe-clean" src="https://www.instagram.com/p/DBZJT5-Ow7i/embed" allowfullscreen loading="lazy"></iframe>
-          <iframe class="portrait iframe-clean" src="https://www.instagram.com/p/DAosNXAJp82/embed" allowfullscreen loading="lazy"></iframe>
+          <video autoplay loop muted playsinline>
+            <source src="https://github.com/Frank-07/PortfolioVideoEditing/raw/aff657d18a839fc2472eb20755401a9bb15d1239/Videos/videoplayback.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted playsinline>
+            <source src="https://github.com/Frank-07/PortfolioVideoEditing/raw/aff657d18a839fc2472eb20755401a9bb15d1239/Videos/videoplayback2.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
 
       <!-- Personal Short Films header -->
       <h2 class="text-2xl font-bold text-center text-white/90">Personal Short Films</h2>
 
-      <!-- 4 -->
       <div class="card overflow-hidden">
         <div class="p-6 border-b border-white/10">
-          <h3 class="text-xl font-semibold">Dos Dimensiones: Skate Short Film</h3>
+          <h3 class="text-xl font-semibold">Two Dimentions: Skate Short Film</h3>
           <p class="text-sm text-white/70">Editing and composition in Adobe Premiere.</p>
         </div>
         <div class="p-6">
           <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
             <iframe class="w-full h-full" src="https://www.youtube.com/embed/AcxOCRV8lMQ?enablejsapi=1&autoplay=0&loop=1&playlist=AcxOCRV8lMQ&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="Dos Dimensiones: Skate Short Film" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+     <div class="card overflow-hidden">
+        <div class="p-6 border-b border-white/10">
+          <h3 class="text-xl font-semibold">Skate and friends: Skate Short Film 2</h3>
+          <p class="text-sm text-white/70">Editing and composition in Adobe Premiere.</p>
+        </div>
+        <div class="p-6">
+          <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/4Z4yx_2wBXM?enablejsapi=1&autoplay=0&loop=1&playlist=4Z4yx_2wBXM&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="Skate and friends: Skate Short Film 2" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-white/10">
+          <h3 class="text-xl font-semibold">Skating in Autumn: Skate Short Film 3</h3>
+              <p class="text-sm text-white/70">Editing and composition in Adobe Premiere.</p>
+        </div>
+        <div class="p-6">
+          <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/VsGmeAGq9cM?enablejsapi=1&autoplay=0&loop=1&playlist=VsGmeAGq9cM&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="VsGmeAGq9cM" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
