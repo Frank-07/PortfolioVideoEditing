@@ -7,9 +7,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <meta name="color-scheme" content="dark" />
   <style>
-    html, body { height: 100%; }
-    /* Using utility classes directly to avoid build-time @apply issues */
-    .card { border-radius: 1rem; border-width: 1px; border-color: rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background: radial-gradient(circle at 30% 30%, #1b2437, #0e111a 70%);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #f8f9fa;
+    }
+    .card { border-radius: 1rem; border-width: 1px; border-color: rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); backdrop-filter: blur(12px); }
     .btn { display:inline-flex; align-items:center; justify-content:center; padding:0.75rem 1.5rem; border-radius:1.5rem; font-weight:600; font-size:1rem; box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05); transition:transform .15s ease, opacity .15s ease; }
     .btn:hover { transform: scale(1.05); }
     .btn-default { background: linear-gradient(90deg,#a5b4fc,#d8b4fe,#f9a8d4); color:#000; }
@@ -18,23 +23,14 @@
     .separator { margin:1.5rem 0; height:1px; background-color: rgba(255,255,255,0.1); width:100%; }
     .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
-    /* Minimal custom video controls */
-    .vid-controls { display:flex; align-items:center; gap:.5rem; padding:.5rem .75rem; background: rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.08); border-radius:.75rem; margin-top:.5rem; }
-    .vid-btn { appearance:none; border:0; padding:.25rem .5rem; border-radius:.5rem; color:#fff; background: rgba(255,255,255,.1); cursor:pointer; font-size:.875rem; }
-    .vid-btn:hover { background: rgba(255,255,255,.18); }
-    .vid-range { width: 140px; accent-color:#fff; }
   </style>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
-<body class="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
+<body class="min-h-screen text-zinc-100">
 
-  <!-- Header: centered prominent buttons -->
   <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 border-b border-white/5 py-5">
     <div class="mx-auto max-w-6xl flex flex-col items-center justify-center text-center gap-4">
       <nav class="flex flex-wrap justify-center gap-4">
-        <button id="btn-cover" class="btn btn-secondary">Cover Letter</button>
+        <a id="btn-cover" class="btn btn-secondary" href="https://frank-07.github.io/Cover-Letter-VideoEdit/" target="_blank">Cover Letter</a>
         <button id="btn-work" class="btn btn-default">Work Samples</button>
       </nav>
     </div>
@@ -47,10 +43,12 @@
         <div class="grid md:grid-cols-[1.2fr,0.8fr] gap-8">
           <div>
             <h2 class="text-4xl md:text-5xl font-black leading-[1.1]">Cinematic Design and Video Editor</h2>
-            <p class="mt-4 text-white/80">
-              I'm a <span class="font-medium">Technical Artist</span> and <span class="font-medium">Video Editor</span> focused on agile storytelling,
-              cinematic finishing, and real-time rendering with Unreal Engine 5. I combine <span class="font-medium">editing</span>,
-              <span class="font-medium">motion graphics</span>, and <span class="font-medium">in-engine capture</span> to deliver pieces with rhythm, clarity, and style.
+            <p class="mt-4 text-white/80 whitespace-pre-line">
+I'm a Technical Artist and Video Editor focused on agile storytelling, cinematic finishing, and real-time rendering with Unreal Engine 5. I combine editing, motion graphics, and in-engine capture to deliver pieces with rhythm, clarity, and style.
+
+My work bridges the gap between technical precision and creative flow. I enjoy pushing visual boundaries, experimenting with lighting, camera movement, and composition to bring stories to life in dynamic and emotionally engaging ways.
+
+With experience across post-production and real-time workflows, I thrive in projects that blend filmmaking, design, and interactive media. Whether it's a cinematic trailer, a gameplay sequence, or a motion piece, my goal is always the same: to craft visuals that feel alive, cohesive, and memorable.
             </p>
             <div class="mt-6 flex flex-wrap gap-2">
               <span class="badge">Unreal Engine 5</span>
@@ -111,198 +109,63 @@
 
   <div class="separator"></div>
 
-  <!-- Cover Letter Section (hidden by default) -->
-  <section id="cover" class="mx-auto max-w-6xl px-4 pb-10 reveal hidden">
-    <div class="mb-6">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Cover Letter</h2>
-      <p class="text-white/70 mt-2 max-w-2xl">My background, focus, and how I work.</p>
-    </div>
-
-    <div class="grid lg:grid-cols-3 gap-6">
-      <div class="card lg:col-span-2">
-        <div class="p-6 border-b border-white/10">
-          <h3 class="text-xl font-semibold">Summary</h3>
-          <p class="text-sm text-white/70">Game development focused on video editing and trailer creation.</p>
-        </div>
-        <div class="p-6 space-y-4">
-          <p class="text-white/80">
-            Since 2020, I've worked with <b>Unreal Engine</b> on real-time capture and rendering pipelines, integrating <b>Premiere Pro</b> for editing and <b>After Effects</b> for motion and compositing. I focus on <b>telling visual stories</b> with rhythm, clarity, and a polished aesthetic.
-          </p>
-          <ul class="list-disc pl-6 space-y-2 text-white/80">
-            <li>In-engine capture (Sequencer, camera rigs, Lumen/Nanite presets).</li>
-            <li>Narrative editing, music and sound design.</li>
-            <li>Compositing, titles, lower thirds and animated graphics.</li>
-            <li>Color grading and mastering for social/TV/cinema.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="p-6 border-b border-white/10">
-          <h3 class="text-xl font-semibold">Services</h3>
-          <p class="text-sm text-white/70">What I can do for your project</p>
-        </div>
-        <div class="p-6 space-y-3">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <p class="font-medium">Trailers & Teasers</p>
-              <p class="text-sm text-white/70">Game/Film – edit + FX + color</p>
-            </div>
-            <span class="badge">UE5 + AE</span>
-          </div>
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <p class="font-medium">In-engine cinematics</p>
-              <p class="text-sm text-white/70">Sequencer, cameras, post</p>
-            </div>
-            <span class="badge">Realtime</span>
-          </div>
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <p class="font-medium">Motion Graphics</p>
-              <p class="text-sm text-white/70">Branding packs, titles, HUD</p>
-            </div>
-            <span class="badge">AE</span>
-          </div>
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <p class="font-medium">Social editing</p>
-              <p class="text-sm text-white/70">Vertical cuts, subtitles, callouts</p>
-            </div>
-            <span class="badge">Premiere</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid lg:grid-cols-3 gap-6 mt-6">
-      <div class="card">
-        <div class="p-6 border-b border-white/10">
-          <h3 class="text-xl font-semibold">Stack</h3>
-          <p class="text-sm text-white/70">Software & tools</p>
-        </div>
-        <div class="p-6 flex flex-wrap gap-2">
-          <span class="badge">Premiere Pro</span>
-          <span class="badge">After Effects</span>
-          <span class="badge">Unreal Engine 5</span>
-          <span class="badge">DaVinci Resolve</span>
-        </div>
-      </div>
-
-      <div class="card lg:col-span-2">
-        <div class="p-6 border-b border-white/10">
-          <h3 class="text-xl font-semibold">Experience</h3>
-          <p class="text-sm text-white/70">Game development & editing</p>
-        </div>
-        <div class="p-6 space-y-6">
-          <div class="relative pl-6">
-            <div class="absolute left-0 top-2 w-2 h-2 rounded-full bg-white/60"></div>
-            <p class="text-sm text-white/60">2020 – Present</p>
-            <h4 class="text-lg font-semibold">Technical Artist / Video Editor · <span class="text-white/70">Scubalight Studios</span></h4>
-            <ul class="list-disc pl-5 text-white/80 mt-2 space-y-1">
-              <li>Editing of trailers and teasers for UE5 projects.</li>
-              <li>In-engine cinematics (Sequencer, cameras, lighting).</li>
-              <li>Compositing and motion graphics in After Effects.</li>
-            </ul>
-          </div>
-          <div class="relative pl-6">
-            <div class="absolute left-0 top-2 w-2 h-2 rounded-full bg-white/60"></div>
-            <p class="text-sm text-white/60">2020 – Present</p>
-            <h4 class="text-lg font-semibold">Game Dev / Content Creator · <span class="text-white/70">Skoogalike Studios</span></h4>
-            <ul class="list-disc pl-5 text-white/80 mt-2 space-y-1">
-              <li>Gameplay capture and devlog editing.</li>
-              <li>Color grading and multi-platform delivery.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Work Showcase Section (visible by default) -->
   <section id="work" class="mx-auto max-w-6xl px-4 pb-16 reveal">
     <div class="mb-6">
       <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Work Samples</h2>
       <p class="text-white/70 mt-2 max-w-2xl">Videos embedded directly on the page. Replace the links with your real pieces.</p>
     </div>
 
-    <!-- Featured Reel (autoplay, loop, non-interactive) -->
-    <div class="card overflow-hidden">
-      <div class="p-6 border-b border-white/10">
-        <h3 class="text-xl font-semibold">Don't Kill Rumble demo trailer Latin American Games Showcase</h3>
-        <p class="text-sm text-white/70">Mix of gameplay capture and real-time UE5 cinematics, edited and sound designed in Premiere, with visual effects in After Effects.</p>
-      </div>
-      <div class="p-6">
-        <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10 pointer-events-none">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/2EGC1s9mBOI?enablejsapi=1&autoplay=1&loop=1&playlist=2EGC1s9mBOI&controls=0&disablekb=1&modestbranding=1&mute=1&playsinline=1&rel=0&iv_load_policy=3" title="Don't Kill Rumble demo trailer Latin American Games Showcase" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="space-y-8">
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-white/10">
+          <h3 class="text-xl font-semibold">Don't Kill Rumble demo trailer Latin American Games Showcase</h3>
+          <p class="text-sm text-white/70">Mix of gameplay capture and real-time UE5 cinematics, edited and sound designed in Premiere, with visual effects in After Effects.</p>
         </div>
-      </div>
-    </div>
-
-    <!-- Grid -->
-    <div class="grid md:grid-cols-2 gap-6 mt-6">
-      <!-- Second video updated -->
-      <div class="reveal">
-        <div class="card overflow-hidden">
-          <div class="p-6 pb-3">
-            <h4 class="text-xl">Don't Kill Rumble - Game Trailer</h4>
-            <div class="flex flex-wrap gap-2 mt-2">
-              <span class="badge">Premiere</span>
-              <span class="badge">Photoshop</span>
-              <span class="badge">After Effects</span>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10 pointer-events-none">
-              <iframe class="w-full h-full" src="https://www.youtube.com/embed/U8V23GT6g6g?enablejsapi=1&autoplay=1&loop=1&playlist=U8V23GT6g6g&controls=0&disablekb=1&modestbranding=1&mute=1&playsinline=1&rel=0&iv_load_policy=3" title="Don't Kill Rumble - Game Trailer" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            <p class="text-sm text-white/70 mt-3">Transition effects in Premiere, 2D graphics in Photoshop, and post-production animation and effects in After Effects.</p>
+        <div class="p-6">
+          <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/2EGC1s9mBOI?enablejsapi=1&autoplay=0&loop=1&playlist=2EGC1s9mBOI&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="Don't Kill Rumble demo trailer Latin American Games Showcase" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
 
-      <!-- Example third video (placeholder) -->
-      <div class="reveal">
-        <div class="card overflow-hidden">
-          <div class="p-6 pb-3">
-            <h4 class="text-xl">Gameplay Teaser – UE5</h4>
-            <div class="flex flex-wrap gap-2 mt-2">
-              <span class="badge">UE5</span>
-              <span class="badge">Premiere</span>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10 pointer-events-none">
-              <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&disablekb=1&modestbranding=1&mute=1&playsinline=1&rel=0&iv_load_policy=3" title="Gameplay Teaser – UE5" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            <p class="text-sm text-white/70 mt-3">In-engine capture, Editing</p>
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-white/10">
+          <h3 class="text-xl font-semibold">Don't Kill Rumble - Game Trailer</h3>
+          <p class="text-sm text-white/70">Transition effects in Premiere, 2D graphics in Photoshop, and post-production animation and effects in After Effects.</p>
+        </div>
+        <div class="p-6">
+          <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/U8V23GT6g6g?enablejsapi=1&autoplay=0&loop=1&playlist=U8V23GT6g6g&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="Don't Kill Rumble - Game Trailer" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
 
-      <!-- Example fourth video (placeholder) -->
-      <div class="reveal">
-        <div class="card overflow-hidden">
-          <div class="p-6 pb-3">
-            <h4 class="text-xl">Music Video – Edit & FX</h4>
-            <div class="flex flex-wrap gap-2 mt-2">
-              <span class="badge">Premiere</span>
-              <span class="badge">AE</span>
-            </div>
-          </div>
-          <div class="p-6 pt-0">
-            <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10 pointer-events-none">
-              <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&disablekb=1&modestbranding=1&mute=1&playsinline=1&rel=0&iv_load_policy=3" title="Music Video – Edit & FX" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            <p class="text-sm text-white/70 mt-3">Rhythm, Transitions, FX</p>
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-white/10">
+          <h3 class="text-xl font-semibold">Gameplay Teaser – UE5</h3>
+          <p class="text-sm text-white/70">In-engine capture, Editing</p>
+        </div>
+        <div class="p-6">
+          <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=0&loop=1&playlist=dQw4w9WgXcQ&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="Gameplay Teaser – UE5" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
       </div>
 
+      <div class="card overflow-hidden">
+        <div class="p-6 border-b border-white/10">
+          <h3 class="text-xl font-semibold">Music Video – Edit & FX</h3>
+          <p class="text-sm text-white/70">Rhythm, Transitions, FX</p>
+        </div>
+        <div class="p-6">
+          <div class="aspect-video w-full overflow-hidden rounded-xl border border-white/10">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=0&loop=1&playlist=dQw4w9WgXcQ&controls=1&modestbranding=1&mute=0&playsinline=1&rel=0&iv_load_policy=3" title="Music Video – Edit & FX" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="mt-12 border-t border-white/5">
     <div class="mx-auto max-w-6xl px-4 py-10 grid md:grid-cols-2 gap-6 items-center">
       <div>
@@ -314,106 +177,20 @@
       </div>
     </div>
   </footer>
-
   <script>
-    // Icons
-    window.addEventListener('DOMContentLoaded', () => { if (window.lucide) window.lucide.createIcons(); });
-
-    // Elements
-    const btnCover = document.getElementById('btn-cover');
-    const btnWork  = document.getElementById('btn-work');
-    const sectionCover = document.getElementById('cover');
-    const sectionWork  = document.getElementById('work');
-    const headerEl = document.querySelector('header');
-
-    // Safe toggle helper
-    function safeToggle(el, hidden) { if (el) el.classList.toggle('hidden', hidden); }
-
-    // Activate tab and scroll with header offset so buttons stay visible
-    function setActive(tab) {
-      const isCover = tab === 'cover';
-      safeToggle(sectionCover, !isCover);
-      safeToggle(sectionWork, isCover);
-      if (btnCover && btnWork) {
-        btnCover.className = 'btn ' + (isCover ? 'btn-default' : 'btn-secondary');
-        btnWork.className  = 'btn ' + (!isCover ? 'btn-default' : 'btn-secondary');
-      }
-      const target = isCover ? sectionCover : sectionWork;
-      if (target) {
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      const btnWork = document.getElementById('btn-work');
+      const headerEl = document.querySelector('header');
+      const sectionWork = document.getElementById('work');
+      function scrollWithOffset(target){
+        if (!target) return;
         const headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
         const y = target.getBoundingClientRect().top + window.scrollY - headerH - 8;
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
-    }
-
-    // Listeners
-    if (btnCover) btnCover.addEventListener('click', () => setActive('cover'));
-    if (btnWork)  btnWork.addEventListener('click', () => setActive('work'));
-
-    // Reveal on scroll
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    }
-
-    // --- Minimal custom controls over YouTube Iframe API ---
-    const ytPlayers = new Map();
-    function buildControls(forIframe){
-      const container = forIframe.closest('.p-6').querySelector('.aspect-video');
-      if (!container) return;
-      const bar = document.createElement('div');
-      bar.className = 'vid-controls';
-      const btn = document.createElement('button');
-      btn.className = 'vid-btn';
-      btn.textContent = 'Pause';
-      const range = document.createElement('input');
-      range.type = 'range'; range.min = '0'; range.max = '100'; range.value = '50';
-      range.className = 'vid-range';
-      bar.appendChild(btn); bar.appendChild(range);
-      container.parentElement.insertBefore(bar, container.nextSibling);
-      // Handlers
-      btn.addEventListener('click', () => {
-        const p = ytPlayers.get(forIframe.id);
-        if (!p) return;
-        const state = p.getPlayerState();
-        if (state === YT.PlayerState.PLAYING || state === YT.PlayerState.BUFFERING) { p.pauseVideo(); btn.textContent = 'Play'; }
-        else { p.playVideo(); btn.textContent = 'Pause'; }
-      });
-      range.addEventListener('input', () => {
-        const p = ytPlayers.get(forIframe.id);
-        if (!p) return;
-        const v = parseInt(range.value, 10);
-        p.setVolume(v);
-        if (v === 0) p.mute(); else p.unMute();
-      });
-    }
-
-    function initYT(){
-      const iframes = document.querySelectorAll('#work iframe');
-      let index = 0;
-      iframes.forEach((f)=>{
-        if (!f.id) { f.id = 'yt-embed-' + (++index); }
-        try {
-          const player = new YT.Player(f.id, {
-            events: {
-              onReady: (e)=>{ e.target.mute(); e.target.playVideo(); },
-            }
-          });
-          ytPlayers.set(f.id, player);
-          buildControls(f);
-        } catch(_){}
-      });
-    }
-    // Iframe API will call this
-    window.onYouTubeIframeAPIReady = function(){ initYT(); }
-
-    // Smoke tests
-    console.assert(!!document.getElementById('work'), '#work missing');
-    console.assert(!!document.getElementById('cover'), '#cover missing');
+      if (btnWork) btnWork.addEventListener('click', () => scrollWithOffset(sectionWork));
+    });
   </script>
 </body>
 </html>
